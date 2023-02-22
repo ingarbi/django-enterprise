@@ -2,6 +2,7 @@ from django.db import models
 from djmoney.models.fields import MoneyField
 from djmoney.models.validators import MaxMoneyValidator, MinMoneyValidator
 from django.db.models.functions import Lower
+from django.contrib.auth.models import AbstractUser
 
 MAKE_CHOICES = (
     (1, 'Buick'),
@@ -20,6 +21,12 @@ class VehicleModel(models.Model):
         verbose_name='Model',
         max_length=75,
         unique=True,
+        blank=True,
+        null=True,
+    )
+    make = models.PositiveIntegerField(
+        choices=MAKE_CHOICES,
+        verbose_name='Vehicle Make/Brand',
         blank=True,
         null=True,
     )
@@ -109,9 +116,19 @@ class Vehicle(models.Model):
         blank=True,
         null=True,
     )
+    def __str__(self):
+        MAKE_CHOICES_DICT = dict(MAKE_CHOICES)
+        return MAKE_CHOICES_DICT[self.make] + ' ' + self.model.name
+
+    def full_vehicle_name(self):
+        return self.__str__() + ' - ' + self.engine.name
+
+    @property
+    def fullname(self):
+        return self.__str__() + ' - ' + self.engine.name
 
 
-class Seller(models.Model):
+class Seller(AbstractUser):
     name = models.CharField(
         verbose_name='Seller Name',
         max_length=150,
@@ -133,6 +150,27 @@ class engine2(models.Model):
         verbose_name='Engine', max_length=75,
         blank=True, null=True,
     )
+    vehicle_model = models.ForeignKey(
+        VehicleModel,
+        on_delete=models.CASCADE,
+        verbose_name='Model',
+        related_name='model_engine2',
+        blank=True,
+        null=True,
+    )
 
     class Meta:
+        abstract = True
         db_table = 'chapter_3_practice_engine'
+        ordering = ['name', ]
+        verbose_name = 'Practice Engine'
+        verbose_name_plural = 'Practice Engines'
+
+
+class engine3(engine2):
+    other_name = models.CharField(
+        verbose_name='Other Engine Name',
+        max_length=75,
+        blank=True,
+        null=True,
+    )

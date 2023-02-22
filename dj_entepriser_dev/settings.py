@@ -145,3 +145,6 @@ CURRENCY_CHOICES = [
     ('USD', 'USD $'),
     ('EUR', 'EUR €')
 ]
+
+
+AUTH_USER_MODEL = 'chapter_3.Seller'
