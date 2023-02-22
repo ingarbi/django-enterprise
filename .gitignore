@@ -1,0 +1,18 @@
+# Environments #
+venv
+.env
+
+# Keep Rule
+!gitkeep.txt
+
+# Django #
+db.sqlite3
+*.log
+*.pyc
+__pycache__
+
+# Media – User Generated Content #
+media/
+
+# Heroku
+staticfiles/
