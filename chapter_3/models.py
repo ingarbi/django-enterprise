@@ -16,6 +16,16 @@ YESNO_CHOICES = (
 )
 
 
+class BuickVehicleManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(make=1)
+
+
+class ChevyVehicleManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(make=3)
+
+
 class VehicleModel(models.Model):
     name = models.CharField(
         verbose_name='Model',
@@ -116,6 +126,14 @@ class Vehicle(models.Model):
         blank=True,
         null=True,
     )
+
+    # The Default Model Manager
+    objects = models.Manager()
+    # The Buick Specific Manager
+    buick_objects = BuickVehicleManager()
+    # The Chevy Specific Manager
+    chevy_objects = ChevyVehicleManager()
+
     def __str__(self):
         MAKE_CHOICES_DICT = dict(MAKE_CHOICES)
         return MAKE_CHOICES_DICT[self.make] + ' ' + self.model.name
