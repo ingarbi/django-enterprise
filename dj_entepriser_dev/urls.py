@@ -28,3 +28,8 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(
         settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+handler404 = 'chapter_4.views.custom_page_not_found_view'
+handler500 = 'chapter_4.views.custom_error_view'
+handler403 = 'chapter_4.views.custom_permission_denied_view'
+handler400 = 'chapter_4.views.custom_bad_request_view'

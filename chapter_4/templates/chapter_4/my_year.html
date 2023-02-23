@@ -11,6 +11,9 @@
         {% if year %}
             <p>{{ year }}</p>
         {% endif %}
+<br>
+        <a href="{{ base_url }}{% url 'year_url' 2023 %}">2023</a>
+        <a href="{{ base_url }}{% url 'year_url' 2024 %}">2024</a>
         
         {% comment %}
             {#<br /><br />

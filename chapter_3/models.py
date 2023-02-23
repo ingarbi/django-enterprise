@@ -145,6 +145,23 @@ class Vehicle(models.Model):
     def fullname(self):
         return self.__str__() + ' - ' + self.engine.name
 
+    def get_url(self):
+        from django.urls import reverse
+        return reverse(
+            'vehicle-detail',
+            kwargs={'id': self.pk}
+        )
+
+    def get_absolute_url(self, request):
+        from django.urls import reverse
+        base_url = request.build_absolute_uri(
+            '/'
+        )[:-1].strip('/')
+        return base_url + reverse(
+            'vehicle-detail',
+            kwargs={'id': self.pk}
+        )
+
 
 class Seller(AbstractUser):
     name = models.CharField(
