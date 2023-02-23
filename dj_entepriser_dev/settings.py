@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 
     'chapter_2',
     'chapter_3',
+    'chapter_4',
 
 ]
 
