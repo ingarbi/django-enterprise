@@ -1,0 +1,44 @@
+{% extends 'chapter_5/base/base_template_1.html' %}
+{% load static %}
+
+{% block page_title %}{{ title }}{% endblock %}
+{% block head_stylesheets %}{% endblock %}
+{% block js_scripts %}{% endblock %}
+{% block page_id %}{{ page_id }}{% endblock %}
+{% block page_class %}{{ block.super }} {{ page_class }}{% endblock %}
+
+{% block body_content %}
+    {% if h1_tag %}
+        <h1>{{ h1_tag|safe }}</h1>
+    {% else %}
+        <h1>Title Not Found</h1>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        
+        {# Form Generated Without Special Formatting #}
+        {{ form }}
+
+        {# Form Generated with Fields Wrapped in <p></p> tags #}
+        {% comment %}
+        {{ form.as_p }}
+        {% endcomment %}
+
+        {# Form Generated with Fields Wrapped in <tr></tr> tags #}
+        {% comment %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        {% endcomment %}
+
+        {# Form Generated with Fields Wrapped in <li></li> tags #}
+        {% comment %}
+        <ul>
+            {{ form.as_ul }}
+        </ul>
+        {% endcomment %}
+
+        <input type="submit" value="Send Message">
+    </form>
+{% endblock %}

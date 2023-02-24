@@ -1,0 +1,66 @@
+{% extends 'chapter_5/base/base_template_1.html' %}
+{% load static %}
+
+{% block page_title %}{{ title }}{% endblock %}
+{% block head_stylesheets %}{% endblock %}
+{% block js_scripts %}{% endblock %}
+{% block page_id %}{{ page_id }}{% endblock %}
+{% block page_class %}{{ block.super }} {{ page_class }}{% endblock %}
+
+{% block body_content %}
+    {% if h1_tag %}
+        <h1>{{ h1_tag|safe }}</h1>
+    {% else %}
+        <h1>Title Not Found</h1>
+    {% endif %}
+
+    <form method="post" id="form">
+        {% csrf_token %}
+
+        {# Form Generated Without Special Formatting #}
+        {{ form }}
+
+        {# Form Generated with Fields Wrapped in <p></p> tags #}
+        {% comment %}
+        {{ form.as_p }}
+        {% endcomment %}
+
+        {# Form Generated with Fields Wrapped in <li></li> tags #}
+        {% comment %}
+        <ul>
+            {{ form.as_ul }}
+        </ul>
+        {% endcomment %}
+
+        {# Form Generated with Fields Wrapped in <tr></tr> tags #}
+        {% comment %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        {% endcomment %}
+
+        {# In-line Formset Example #}
+        {% if buyer_formset %}
+            <h3>Prospective Buyers</h3>
+
+            {{ buyer_formset.non_form_errors }}
+            {{ buyer_formset.management_form }}
+
+            {% for form in buyer_formset %}
+                <div class="formset-container {{ buyer_formset.prefix }}">
+                    <div class="first-name">{{ form.first_name.label }}: {{ form.first_name }}</div>
+                    <div class="last-name">{{ form.last_name.label }}: {{ form.last_name }}</div>
+
+                    {% if buyer_formset.can_delete %}
+                        <div class="delete">{{ form.DELETE }} {{ form.DELETE.label }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {# Dynamic - Add In-line Formset Button Example #}
+        <button id="add-formset" type="button">Add Another Prospective Buyer</button>
+
+        <input type="submit" value="Save Vehicle">
+    </form>
+{% endblock %}

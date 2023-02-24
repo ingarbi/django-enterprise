@@ -28,7 +28,7 @@ SECRET_KEY = 'sdsdsdsdsdsdsdsdggwddffffffffqamkdfdfjk'
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*', '.your-domain.com', ]
 
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'chapter_2',
     'chapter_3',
     'chapter_4',
+    'chapter_5',
 
 ]
 
