@@ -23,6 +23,10 @@ urlpatterns = [
     path('', include('chapter_4.urls')),
     path('', include('chapter_5.urls')),
     path('', include('chapter_6.urls')),
+    path('', include('chapter_7.urls')),
+    path('', include('chapter_9.urls')),
+    path('', include('chapter_8.urls')),
+    path('', include('chapter_10.urls')),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
